@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.6.3"
+}
+
+group 'com.github.hlam'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
+}
