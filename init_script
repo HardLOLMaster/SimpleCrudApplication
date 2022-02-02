@@ -1,0 +1,37 @@
+#!/bin/bash
+sudo yum update -y
+sudo yum install -y java-11
+sudo yum install -y git
+
+cd /usr/local
+sudo git clone https://github.com/HardLOLMaster/SimpleCrudApplication.git
+cd SimpleCrudApplication
+sudo ./gradlew bootJar
+
+sudo touch /etc/systemd/system/SimpleCrudApplication.service
+
+sudo cat >/etc/systemd/system/SimpleCrudApplication.service <<EOL
+[Unit]
+Description= Simple Crud Application
+[Service]
+User=root
+
+WorkingDirectory=/usr/local
+
+#path to executable.
+#executable is a bash script which calls jar file
+ExecStart=/bin/java -jar /usr/local/SimpleCrudApplication/build/libs/SimpleCrudApplication-1.0.jar
+ExecStop=/bin/kill -15 $MAINPID
+
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+sudo systemctl daemon-reload
+sudo systemctl start SimpleCrudApplication.service
+sudo systemctl enable SimpleCrudApplication.service
