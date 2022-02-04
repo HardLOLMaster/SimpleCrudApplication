@@ -13,3 +13,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
 }
+
+bootJar {
+    archiveFileName.set("crud-app.jar")
+}
