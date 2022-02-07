@@ -20,7 +20,7 @@ WorkingDirectory=/usr/local
 
 #path to executable.
 #executable is a bash script which calls jar file
-ExecStart=/bin/java -jar /usr/local/SimpleCrudApplication/build/libs/SimpleCrudApplication-1.0.jar
+ExecStart=/bin/java -jar /usr/local/SimpleCrudApplication/build/libs/crud-app.jar
 ExecStop=/bin/kill -15 $MAINPID
 
 SuccessExitStatus=143
